@@ -1,8 +1,20 @@
-.dash-item:hover {
+.dash-card {
+    svg {
+        font-size: 3rem;
+        margin: 0.5rem 0;
+        color: #3366CC;
+    }
+} 
+
+.dash-card:hover {
     transition: all 0.5s ease-in-out;
-    background: #2196f3;
+    background: #3366CC;
 
     p {
+        color: rgb(233, 233, 233);
+    }
+
+    svg {
         color: #fff;
     }
 } 
