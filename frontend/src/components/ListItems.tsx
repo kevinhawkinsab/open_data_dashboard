@@ -14,9 +14,10 @@ import HelpIcon from '@mui/icons-material/Help';
 import DescriptionIcon from '@mui/icons-material/Description';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Link } from 'react-router-dom';
+import { Logout } from '@mui/icons-material';
 
 export const mainListItems = (
-  <React.Fragment>
+  <div className='py-2'>
     <Link to="/home" style={{textDecoration: 'none', color: 'inherit'}}>
       <ListItemButton>
         <ListItemIcon>
@@ -49,25 +50,35 @@ export const mainListItems = (
         <ListItemText primary="Specialities" />
       </ListItemButton>
     </Link>
-  </React.Fragment>
+  </div>
 );
 
 export const secondaryListItems = (
-  <React.Fragment>
+  <div className='flex-col space-between'>
     {/* <ListSubheader component="div" inset>
       Saved reports
     </ListSubheader> */}
-    <ListItemButton>
-      <ListItemIcon>
-        <SettingsIcon />
-      </ListItemIcon>
-      <ListItemText primary="Settings" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <HelpIcon />
-      </ListItemIcon>
-      <ListItemText primary="Help & support" />
-    </ListItemButton>
-  </React.Fragment>
+    <div>
+      <ListItemButton>
+        <ListItemIcon>
+          <SettingsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Settings" />
+      </ListItemButton>
+      <ListItemButton>
+        <ListItemIcon>
+          <HelpIcon />
+        </ListItemIcon>
+        <ListItemText primary="Help & support" />
+      </ListItemButton>
+    </div>
+    <div>
+      <ListItemButton>
+        <ListItemIcon>
+          <Logout />
+        </ListItemIcon>
+        <ListItemText primary="Logout" />
+      </ListItemButton>
+    </div>
+  </div>
 );

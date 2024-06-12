@@ -5,7 +5,8 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Typography } from '@mui/material';
+import { Button, IconButton, Typography } from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 // Generate Order Data
 function createData(
@@ -62,9 +63,9 @@ function preventDefault(event: React.MouseEvent) {
 export default function Orders() {
   return (
     <React.Fragment>
-    <Typography component="h2" variant="h6" color="primary" gutterBottom>
+      <Typography component="h2" variant="h6" color="primary" gutterBottom>
         Recent Order
-        </Typography>
+      </Typography>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -92,4 +93,4 @@ export default function Orders() {
       </Link>
     </React.Fragment>
   );
-}
+} 

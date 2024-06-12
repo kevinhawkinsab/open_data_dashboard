@@ -82,7 +82,7 @@ const Dashboard= ({element}: any) => {
         <CssBaseline />
         <AppBar position="absolute" open={open}>
          {/* keep right padding when drawer closed */}
-          <Toolbar sx={{pr: '24px', }}>
+          <Toolbar sx={{pr: '24px' }}>
             <IconButton edge="start" color="inherit" aria-label="open drawer" onClick={toggleDrawer} sx={{ marginRight: '36px',...(open && { display: 'none' })}}>
               <MenuIcon />
             </IconButton>

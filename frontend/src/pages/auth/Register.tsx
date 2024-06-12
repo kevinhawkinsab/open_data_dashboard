@@ -45,14 +45,7 @@ const Register = () => {
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="sm" sx={{height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
         <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
+        <Box sx={{marginTop: 8, display: 'flex', flexDirection: 'column',alignItems: 'center'}}>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>

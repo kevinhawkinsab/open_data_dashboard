@@ -1,6 +1,6 @@
-import { Badge, Grid, IconButton, Paper, Typography } from '@mui/material'
+import { Badge, Grid, IconButton, Paper, TextField, Typography } from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { SpecialitiesModel } from '../models/specialities';
+import { SpecialitiesModel } from '../models/specialities-type';
 import { FaHeartbeat } from "react-icons/fa";
 import { FaBrain } from "react-icons/fa";
 import BackHandIcon from '@mui/icons-material/BackHand';
@@ -11,6 +11,7 @@ import { FaBone } from "react-icons/fa6";
 import { GiMedicalDrip } from "react-icons/gi";
 import { GiAnatomy } from "react-icons/gi";
 import { GiMedicines } from "react-icons/gi";
+import { ArrowBack, Search } from '@mui/icons-material';
 
 const Specialities = () => {
 
@@ -98,7 +99,29 @@ const Specialities = () => {
   ];
 
   return (
-    <Grid container spacing={3}>
+    <>
+      <div className='flex justify-space my-2'>
+        <div className='flex items-center '>
+          <IconButton aria-label="email" sx={{ background: '#d8e4ff', borderRadius: '10px' }}>
+            <ArrowBack />
+          </IconButton>
+          <Typography component="p" variant="h4" sx={{ fontWeight: '600' }}>
+            Specialities Page
+          </Typography>
+        </div>
+        <div>
+          <TextField id="outlined-basic" label="Search" variant="filled"
+            InputProps={{
+              endAdornment: (
+                <IconButton>
+                  <Search />
+                </IconButton>
+              ),
+            }}
+          />
+        </div>
+      </div>
+      <Grid container spacing={3}>
       {specialitiesList.map((speciality) => (
         <Grid item xs={12} md={3} xl={2}>
           <Paper className='dash-card' sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 160, borderRadius: 3, alignItems: 'center' }}>
@@ -118,6 +141,7 @@ const Specialities = () => {
         </Grid>
       ))}
     </Grid>
+    </>
   )
 }
 

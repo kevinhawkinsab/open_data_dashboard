@@ -18,3 +18,69 @@
         color: #fff;
     }
 } 
+
+.card-contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-1 {
+    gap: 0.5rem;
+    display: flex;
+    /* padding: 0 1.5rem; */
+}
+
+.flex {
+    display: flex;
+    gap: 1rem;
+}
+
+.justify-space {
+    justify-content: space-between;
+}
+
+
+.items-center {
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.mx-1 {
+    margin: 0 1rem;
+}
+
+.my-1 {
+    margin: 1rem 0;
+}
+
+.my-2 {
+    margin: 2rem 0;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+
+}
+
+.flex-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.px-1 {
+    padding: 0 1rem;
+}
+
+.py-1 {
+    padding: 1rem 0;
+}
+
+.py-2 {
+    padding: 2rem 0;
+}
