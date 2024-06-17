@@ -1,0 +1,58 @@
+# ASP.NET Core
+bin/
+obj/
+*.user
+*.rsuser
+.vscode/
+.vs/
+*.dbmdl
+*.jfm
+*.log
+*.tlog
+*.vspxproj.user
+*.csproj.user
+*.suo
+*.sln.docstates
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Entity Framework Core
+Migrations/
+
+# Visual Studio Code
+.vscode/
+.history/
+*.code-workspace
+
+# Rider
+.idea/
+.idea_modules/
+.sln.iml
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows shortcuts
+*.lnk
