@@ -2,6 +2,7 @@
 using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using backend.Context;
+using backend.Models.Dto;
 
 namespace backend.Controllers
 {
@@ -19,30 +20,63 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<IActionResult> ObtenerRoles()
         {
-            var listaRoles = await dbContext.Roles.ToListAsync();
-            return StatusCode(StatusCodes.Status200OK, listaRoles);
+            var roles = await dbContext.Roles
+             .Select(r => new RoleDto
+             {
+                 RoleId = r.RoleId,
+                 RoleName = r.RoleName
+             })
+             .ToListAsync();
+
+            return Ok(roles);
         }
 
         [HttpGet]
         [Route("{id:int}")]
         public async Task<IActionResult> ObtenerRole(int id)
         {
-            var role = await dbContext.Roles.FirstOrDefaultAsync(role => role.RoleId == id);
-            return StatusCode(StatusCodes.Status200OK, role);
+            var role = await dbContext.Roles.Where(r => r.RoleId == id).Select(roleDto => new RoleDto
+            {
+                RoleId = roleDto.RoleId,
+                RoleName = roleDto.RoleName
+            }).FirstOrDefaultAsync();
+
+            if (role == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(role);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CrearRole(Role role)
+        public async Task<ActionResult<RoleDto>> CrearRole([FromBody] RoleDto roleDto)
         {
-            if(role == null || string.IsNullOrEmpty(role.RoleName))
+            if (!ModelState.IsValid)
             {
-                return BadRequest("Invalid role data");
+                return BadRequest(ModelState);
             }
 
-            dbContext.Roles.Add(role);  
+            if (await dbContext.Roles.AnyAsync(r => r.RoleName == roleDto.RoleName))
+            {
+                return BadRequest("A role with the same name already exists.");
+            }
+
+            var role = new Role
+            {
+                RoleName = roleDto.RoleName
+            };
+
+            dbContext.Roles.Add(role);
             await dbContext.SaveChangesAsync();
 
-            return StatusCode(StatusCodes.Status200OK, new { message  = "Rol creado con éxito!"});
+            var responseDto = new RoleDto
+            {
+                RoleId = role.RoleId,
+                RoleName = role.RoleName
+            };
+            return CreatedAtAction(nameof(ObtenerRole), new { id = role.RoleId }, responseDto);
+
         }
     }
 }

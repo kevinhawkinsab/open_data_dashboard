@@ -52,7 +52,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Speciality>> CrearEspecialidad([FromBody] SpecialityDto specialityDto)
+        public async Task<ActionResult<SpecialityDto>> CrearEspecialidad([FromBody] SpecialityDto specialityDto)
         {
             if (!ModelState.IsValid)
             {
@@ -72,7 +72,13 @@ namespace backend.Controllers
             dbContext.Specialities.Add(speciality);
             await dbContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(CrearEspecialidad), new { id = speciality.SpecialityId }, new { message = "Especialidad creada con éxito" });
+            var responseDto = new SpecialityDto
+            {
+                SpecialityId = speciality.SpecialityId,
+                SpecialityName = speciality.SpecialityName
+            };
+
+            return CreatedAtAction(nameof(ObtenerIdEspecialidad), new { id = speciality.SpecialityId }, responseDto);
         }
 
     }
