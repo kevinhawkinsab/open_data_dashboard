@@ -8,6 +8,8 @@ namespace backend.Models
         public MappingProfile()
         {
             CreateMap<Patient, PatientDtoGet>();
+            CreateMap<Doctor, DoctorDtoGet>();
+            CreateMap<Appointment, AppoitmentsDtoGet>();
         }
     }
 }

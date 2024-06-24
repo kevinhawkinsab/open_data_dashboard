@@ -5,10 +5,11 @@ using backend.Context;
 using backend.Models.Dto;
 using static backend.Models.Enums.Enums;
 using AutoMapper;
+using BCrypt.Net;
 
 namespace backend.Controllers
 {
-    [Route("api[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PatientController : ControllerBase
     {
@@ -64,10 +65,12 @@ namespace backend.Controllers
                 return BadRequest("A patient with the same identification already exists.");
             }
 
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(patienDtot.Password);
+
             var user = new User
             {
                 UserName = patienDtot.Username,
-                Password = patienDtot.Password,
+                Password = hashedPassword,
                 Email = patienDtot.Email,
                 RoleId = 2
             };

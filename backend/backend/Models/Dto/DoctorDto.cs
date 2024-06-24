@@ -1,11 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static backend.Models.Enums.Enums;
+﻿using static backend.Models.Enums.Enums;
+using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-
 namespace backend.Models.Dto
 {
-    public class PatientDto
+    public class DoctorDto
     {
         [Required]
         public string Identification { get; set; }
@@ -38,5 +37,7 @@ namespace backend.Models.Dto
         [JsonConverter(typeof(StringEnumConverter))]
         public Status Status { get; set; }
 
+        [Required]
+        public int SpecialityId { get; set; }
     }
 }

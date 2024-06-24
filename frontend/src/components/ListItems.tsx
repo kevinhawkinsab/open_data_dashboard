@@ -73,12 +73,14 @@ export const secondaryListItems = (
       </ListItemButton>
     </div>
     <div>
-      <ListItemButton>
-        <ListItemIcon>
-          <Logout />
-        </ListItemIcon>
-        <ListItemText primary="Logout" />
-      </ListItemButton>
+      <Link to="/auth/login" style={{textDecoration: 'none', color: 'inherit'}}>
+        <ListItemButton>
+          <ListItemIcon>
+            <Logout />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItemButton>
+      </Link>
     </div>
   </div>
 );

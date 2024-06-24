@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+import { Link, useNavigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -13,12 +13,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Container } from '@mui/material';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" to="https://mui.com/">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -31,14 +33,34 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 
 const Login = () => {
+  const navigate = useNavigate();
   //https://images.unsplash.com/photo-1583160384414-494f8667b387?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const user = {
+      userName: data.get('username'),
+      password: data.get('password')
+    }
+
+    console.log(user);
+
+    try {
+      const response = await axios.post('http://localhost:5009/api/Login/', user, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log(response.data.message);
+      navigate('/home');
+    } catch (err: any) {
+      Swal.fire({
+        title: "Error!",
+        text: err.response.data,
+        icon: "error"
+      });
+      console.error(err);
+    }
   };
 
   return (
@@ -53,20 +75,19 @@ const Login = () => {
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus/>
+            <TextField margin="normal" required fullWidth id="username" label="Username" name="username" autoComplete="username" autoFocus/>
             <TextField margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password"/>
-            <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+            <Grid item xs>
+                <Link to="auth/forgot-password" >
+                  Forgot password?
+                </Link>
+              </Grid>
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
               <Grid item>
-                <Link href="/auth/register" variant="body2">
+                <Link to="/auth/register">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

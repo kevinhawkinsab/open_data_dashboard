@@ -5,6 +5,9 @@ using Newtonsoft.Json.Converters;
 using Microsoft.OpenApi.Models;
 using static backend.Models.Enums.Enums;
 using Microsoft.OpenApi.Any;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,28 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 
 // Agregar AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+
+// Add services to the container.
+var key = Encoding.ASCII.GetBytes("YourSuperSecretKeyHere");
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
 
 // Configurar Newtonsoft.Json y StringEnumConverter
 builder.Services.AddControllers()
@@ -70,6 +95,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("NuevaPolitica");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

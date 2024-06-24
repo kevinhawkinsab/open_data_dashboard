@@ -99,7 +99,7 @@ const Dashboard= ({element}: any) => {
         <Drawer variant="permanent" open={open}>
           <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: [1] }}>
             <Typography component="h2" variant="h6" color="primary" gutterBottom>
-              LifeTide
+              Citas Médicas
             </Typography>
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
